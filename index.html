@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Micro Blog</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <script src="script.js"></script>
+
+    <style>
+        .container{
+            display: flex;
+        }
+        .message{
+            display: flex;
+            flex-flow: column;
+        }
+    </style>
+</head>
+<body>
+    <div class="container alert alert-secondary col-xs-4">
+        <div class="dataInput col-xs-4">
+            <div class="input-group mb-3">
+                    <input v-model="userName" type="text" class="form-control" placeholder="Name" aria-label="Example text with button addon" aria-describedby="button-addon1">
+                <div class="input-group">
+                    <textarea v-model="userText" class="form-control" placeholder="TEXT"></textarea>
+                <div class="input-group-append" id="button-addon4">
+                    <button @click="newMessage()" class="btn btn-outline-success" type="button">Button</button>
+                </div>
+                </div>
+            </div>
+        </div>
+        <div class="message col-6">
+            <div v-for="message in messages" class="alert alert-success" role="alert">
+                <h4 class="alert-heading">{{message.name}}</h4>
+                <p>{{message.text}}</p>
+                <hr>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
