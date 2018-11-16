@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Micro Blog</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <script src="script.js"></script>
+
+    <style>
+        .message{
+            height: 600px;
+            display: flex;
+            flex-flow: column;
+            overflow: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container alert alert-info col-4">
+        <div class="dataInput col-xs-4">
+            <div class="input-group mb-3">
+                    <input v-model="userName" type="text" class="form-control" placeholder="Name" aria-label="Example text with button addon" aria-describedby="button-addon1">
+                <div class="input-group">
+                    <textarea v-model="userText" class="form-control" placeholder="TEXT"></textarea>
+                <div class="input-group-append" id="button-addon4">
+                    <button v-bind:class="{ 'btn-danger': error,'btn-outline-success':usual}"
+                            @click="dispatchTime(),newMessage(),seve(messages)"
+                            class="btn " type="button">PUSH</button>
+                </div>
+                </div>
+            </div>
+        </div>
+        <div class="message col-xs-4">
+            <div v-for="(message, index) in messages" @dblclick="edit(index)" class="alert alert-success" role="alert">
+                <p class="h6">{{message.timeIsNow}}<p>
+                <h4 class="alert-heading">{{message.name}}</h4>
+                <p>{{message.text}}</p>
+                <hr>
+                <div v-if="editKey===index">
+                    <textarea v-model="message.text" class="form-control" placeholder="TEXT"></textarea>
+                    <button @click="edit(index),seve(messages)" type="button" class="btn btn-info">Save</button>
+                    <button @click="remove(index),seve(messages)" type="button" class="btn btn-danger ">Remove message</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
