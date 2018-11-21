@@ -5,7 +5,7 @@ window.addEventListener("load", function() {
     async function paste () {
         let res = await fetch("http://127.0.0.1:5000/message");
         let dataJson = await res.json();
-        data = await JSON.parse(dataJson);
+        data = dataJson;
         for (let i =data.length-1;i>=0;i--){
             post.unshift(data[i]);
         }
@@ -13,7 +13,15 @@ window.addEventListener("load", function() {
     paste();
 
     async function seve (message) {
-       await fetch("http://127.0.0.1:5000/save?message="+JSON.stringify(message),{method: "GET"});
+       await fetch("http://127.0.0.1:5000/save", {
+           method: "POST",
+               headers: {
+                   'Accept': 'application/json',
+                   'Content-Type': 'application/json'
+               },
+           body: JSON.stringify(message)
+       }
+           )
     }
     const microBlog = new Vue({
         el: ".container",
@@ -76,4 +84,5 @@ window.addEventListener("load", function() {
     })
 
 });
+
 
